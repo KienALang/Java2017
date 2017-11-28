@@ -1,0 +1,7 @@
+package com.kenny;
+
+public class CustomerDB {
+	public static List<Customer> getAll() {
+		List<Customer> customers = new ArrayList<>();
+	}
+}

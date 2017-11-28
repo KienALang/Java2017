@@ -1,0 +1,10 @@
+package com.kenny;
+
+public class Customer {
+	private int id;
+	private String fullname;
+	private String address;
+	private double salary;
+	
+	
+}

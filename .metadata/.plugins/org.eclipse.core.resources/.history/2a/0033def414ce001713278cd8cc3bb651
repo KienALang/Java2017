@@ -1,0 +1,22 @@
+package com.kenny;
+
+import java.sql.Connection;
+
+public class DBUtil {
+	private static Connection connection;
+	
+	public DBUtil() {}
+	
+	public static synchronized Connection getConnection() throw DBException {
+		if (connection != null) {
+			return connection;
+		}
+		else {
+			try {
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+}

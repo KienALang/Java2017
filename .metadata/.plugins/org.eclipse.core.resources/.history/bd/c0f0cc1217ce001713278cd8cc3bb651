@@ -1,0 +1,11 @@
+package com.kenny;
+
+import java.util.ArrayList;
+
+public class CustomerDB {
+	public static List<Customer> getAll() {
+		List<Customer> customers = new ArrayList<>();
+		
+		return customer;
+	}
+}

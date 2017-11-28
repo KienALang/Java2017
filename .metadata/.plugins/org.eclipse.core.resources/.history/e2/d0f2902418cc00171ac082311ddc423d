@@ -1,0 +1,101 @@
+package com.kenny;
+
+import java.awt.BorderLayout;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionListener;
+
+public class UserInterface extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public UserInterface() {
+		setTitle("Calculator");
+		this.setBounds(0, 0, 600, 600);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		/*---------------Menu Bar------------------*/
+
+		JMenuBar menuBar = new JMenuBar();
+
+		JMenu file = new JMenu("File");
+		file.add(new JMenuItem("Open"));
+		file.add(new JMenuItem("Close"));
+		file.add(new JMenuItem("Exit"));
+
+		menuBar.add(file);
+
+		JMenu option = new JMenu("Option");
+
+		JMenu subMenu = new JMenu("Calculator");
+		subMenu.add(new JCheckBoxMenuItem("Standard"));
+		subMenu.add(new JCheckBoxMenuItem("Scientific"));
+		subMenu.add(new JCheckBoxMenuItem("Programmer"));
+		subMenu.add(new JCheckBoxMenuItem("Date Calculation"));
+
+		option.add(subMenu);
+		option.add(new JMenuItem("Money converter"));
+
+		menuBar.add(option);
+
+		this.setJMenuBar(menuBar);
+		
+		/*---------------Layout------------------*/
+		this.add(BorderLayout.EAST, new JButton("East"));
+		this.add(BorderLayout.WEST, new JButton("West"));
+		this.add(BorderLayout.SOUTH, new JButton("South"));
+		this.add(BorderLayout.NORTH, new JLabel("Expression"));
+		
+		/*---------------Table------------------*/
+		String[] columnNames = {"ID", "FULLNAME", "ADDRESS", "SALARY"};
+		Object[][] data = {
+				{"1", "Smith", "Snowboarding", new Integer(5)},
+				{"2", "Doe", "Rowing", new Integer(3)},
+				{"Sue", "Black", "Knitting", new Integer(2)},
+				    {"Jane", "White", "Speed reading", new Integer(20)},
+				    {"Joe", "Brown", "Pool", new Integer(10)}
+		};
+		JTable customerTable = new JTable(data, columnNames);
+		this.add(BorderLayout.CENTER, customerTable);
+
+		this.setVisible(true);
+	}
+
+	public void databaseConnection() {
+		String driver = "com.mysql.jdbc.Driver";
+
+		try {
+			Class.forName(driver);
+			String url = "jdbc:mysql://localhost:3306/mydatabase";
+			String username = "root";
+			String password = "1234";
+
+			Connection conn = DriverManager.getConnection(url, username, password);
+			Statement statement = (Statement) conn.createStatement();
+			ResultSet customer = statement.executeQuery("Select * from customer");
+			
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		}catch (ClassNotFoundException e) {
+			// TODO: handle exception
+			System.out.println(e);
+		}
+	}
+}

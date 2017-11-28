@@ -1,0 +1,31 @@
+package com.kenny;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import javax.xml.bind.DataBindingException;
+
+public class DBUtil {
+	private static Connection connection;
+	
+	public DBUtil() {}
+	
+	public static synchronized Connection getConnection() throw DBException {
+		if (connection != null) {
+			return connection;
+		}
+		else {
+			try {
+				String url = "jdbc:mysql://localhost:3306/mydatabase";
+				String username = "root";
+				String password = "1234";
+				
+				connection = DriverManager.getConnection(url, username, password);
+				return connection;
+			} catch (SQLException e) {
+				throw new DBException(e)
+			}
+		}
+	}
+}

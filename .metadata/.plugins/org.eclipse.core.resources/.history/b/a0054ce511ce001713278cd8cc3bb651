@@ -1,0 +1,18 @@
+package com.kenny;
+
+public class Customer {
+	public Customer(int id, String fullname, String address, double salary) {
+		
+		this.id = id;
+		this.fullname = fullname;
+		this.address = address;
+		this.salary = salary;
+	}
+	public Customer() {}
+	private int id;
+	private String fullname;
+	private String address;
+	private double salary;
+	
+	
+}

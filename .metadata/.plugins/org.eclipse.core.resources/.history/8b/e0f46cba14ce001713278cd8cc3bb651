@@ -1,0 +1,11 @@
+package com.kenny;
+
+import java.sql.Connection;
+
+public class DBUtil {
+	private static Connection connection;
+	
+	public DBUtil() {}
+	
+	
+}

@@ -1,0 +1,21 @@
+package com.kenny;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CustomerDB {
+	public static List<Customer> getAll() {
+		List<Customer> customers = new ArrayList<>();
+		String sql = "SELECT * FROM customer ORDER BY id";
+		Connection connection = DBUtil.getConnection();
+		
+		try {
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+		return customers;
+	}
+}

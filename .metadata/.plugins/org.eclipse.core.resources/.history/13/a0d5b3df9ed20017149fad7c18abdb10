@@ -1,0 +1,153 @@
+package com.kien;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.*;
+
+public class UserInterface extends JFrame implements KeyListener {
+
+	public UserInterface() {
+		setTitle("Calculator");
+		setBounds(0, 0, 600, 600);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setFocusable(true);
+		addKeyListener(this);
+
+		/*---------------Menu Bar------------------*/
+
+		JMenuBar menuBar = new JMenuBar();
+
+		JMenu fileMenu = new JMenu("File");
+		fileMenu.add(new JMenuItem("Open"));
+		fileMenu.add(new JMenuItem("Close"));
+		fileMenu.add(new JMenuItem("Exit"));
+
+		menuBar.add(fileMenu);
+
+		JMenu option = new JMenu("Option");
+
+		JMenu subMenu = new JMenu("Calculator");
+		subMenu.add(standardCal);
+		subMenu.add(scientificCal);
+		subMenu.add(programmerCal);
+
+		option.add(subMenu);
+		option.add(new JMenuItem("Money converter"));
+
+		menuBar.add(option);
+
+		setJMenuBar(menuBar);
+		/*---------------Menu Bar Ending------------------*/
+
+		exprLabel = new JLabel(expression, SwingConstants.RIGHT);
+
+		JPanel exprPanel = new JPanel();
+		exprPanel.setBackground(new Color(255, 255, 255));
+		exprPanel.add(exprLabel);
+		this.add(BorderLayout.NORTH, exprPanel);
+
+		btnPanel.setBackground(new Color(42, 50, 49));
+		GridLayout grid = new GridLayout(0, 6);
+		btnPanel.setLayout(grid);
+
+		addButton(btnBackspace);
+		addButton(btnCE);
+		addButton(btnC);
+		addButton(btnMC);
+		addButton(btn_7);
+		addButton(btn_8);
+		addButton(btn_9);
+		addButton(btnDiv);
+		addButton(btnSqrt);
+		addButton(btnMR);
+		addButton(btn_4);
+		addButton(btn_5);
+		addButton(btn_6);
+		addButton(btnMul);
+		addButton(btnPercent);
+		addButton(btnMS);
+		addButton(btn_1);
+		addButton(btn_2);
+		addButton(btn_3);
+		addButton(btnMinus);
+		addButton(btnOneofX);
+		addButton(btnMPlus);
+		addButton(btn_0);
+		addButton(btnPlusMinus);
+		addButton(btnDot);
+		addButton(btnPlus);
+		addButton(btnEquals);
+
+		this.add(btnPanel);
+
+		this.setVisible(true);
+
+	}
+
+	private void addButton(JButton mButton) {
+		mButton.setFont(new Font("Arial", 1, 20));
+		btnPanel.add(mButton);
+		mButton.setFocusable(false);
+	}
+
+	private static String expression = "0";
+	private JLabel exprLabel;
+	private JPanel btnPanel = new JPanel();
+	private JButton btn_0 = new JButton("0");
+	private JButton btn_1 = new JButton("1");
+	private JButton btn_2 = new JButton("2");
+	private JButton btn_3 = new JButton("3");
+	private JButton btn_4 = new JButton("4");
+	private JButton btn_5 = new JButton("5");
+	private JButton btn_6 = new JButton("6");
+	private JButton btn_7 = new JButton("7");
+	private JButton btn_8 = new JButton("8");
+	private JButton btn_9 = new JButton("9");
+	private JButton btnPlus = new JButton("+");
+	private JButton btnMinus = new JButton("-");
+	private JButton btnDiv = new JButton("/");
+	private JButton btnMul = new JButton("*");
+	private JButton btnBackspace = new JButton("Backspace");
+	private JButton btnCE = new JButton("CE");
+	private JButton btnC = new JButton("C");
+	private JButton btnMC = new JButton("MC");
+	private JButton btnMR = new JButton("MR");
+	private JButton btnMS = new JButton("MS");
+	private JButton btnMPlus = new JButton("M+");
+	private JButton btnSqrt = new JButton("sqrt");
+	private JButton btnPercent = new JButton("%");
+	private JButton btnOneofX = new JButton("1/x");
+	private JButton btnEquals = new JButton("=");
+	private JButton btnPlusMinus = new JButton("+/-");
+	private JButton btnDot = new JButton(".");
+	private JCheckBoxMenuItem standardCal = new JCheckBoxMenuItem("Standard");
+	private JCheckBoxMenuItem scientificCal = new JCheckBoxMenuItem("Scientific");
+	private JCheckBoxMenuItem programmerCal = new JCheckBoxMenuItem("Programmer");
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		char keyPressed = e.getKeyChar();
+		if(isNumpad())
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
