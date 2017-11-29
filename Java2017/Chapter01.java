@@ -1,13 +1,5 @@
 public class Chapter01 {
 
-	public static void print(String message) {
-		System.out.print(message);
-	}
-
-	public static void println(String message) {
-		System.out.println(message);
-	}
-
 	public void linearEquation(float a, float b) {
 		System.out.println((a != 0) ? "x = "+ -b/a :
 			(b == 0 ? "The equation has a lot of root!" : "the equation has no root"));
@@ -72,7 +64,6 @@ public class Chapter01 {
 	}
 
 	public float calculation_07(int n) {
-
 		float result = 0;
 		if (n > 0) {	
 			result = 15;
@@ -141,25 +132,7 @@ public class Chapter01 {
 	}
 	
 	public boolean isSquareNumber(int number) {
-
-
 		int res = (int) Math.sqrt(number);
-		// int num = number;
-		// // The second-to-top bit is set: 1 << 30 for 32 bits
-		// int bit = 1 << 30;
-
-  //   	// "bit" starts at the highest power of four <= the argument.
-		// while (bit > num) bit >>= 2;
-
-		// while (bit != 0) {
-		// 	if (num >= res + bit) {
-		// 		num -= res + bit;
-		// 		res = (res >> 1) + bit;
-		// 	} else res >>= 1;
-
-		// 	bit >>= 2;
-		// }
-
 		return res*res == number;
 	}
 
@@ -182,7 +155,7 @@ public class Chapter01 {
 
 	public void primeNumberLessThanOrEqual(int n) {;
 		boolean array[] = new boolean[n+1];
-		java.util.Arrays.fill(array, true); //initialize all element to true.
+		java.util.Arrays.fill(array, true);
 		
 		int notExceed = (int) Math.sqrt(n);
 		for (int i = 2; i <= notExceed; ++i ) {
@@ -246,40 +219,36 @@ public class Chapter01 {
 
 	public static void main(String[] args) {
 		
-		Chapter01 object1 = new Chapter01();
-		// object1.linearEquation(0, 4);
-		// object1.linearEquation(0, 0);
-		// object1.linearEquation(-8, 4);
-
-		// object1.quadraticEquation(0, 6, 12);
-
-		// object1.middleNumber(18,6,3);
-
-		// object1.quadraticEquation(0, 4, -1);
-		// object1.quadraticEquation(4, 4, -1);
-		// object1.quadraticEquation(4, 4, 1);//x1 = x2
-		// object1.quadraticEquation(4, 4, 8);
-
-		// object1.numberofDay(2016, 2);
-
-		// System.out.println("Exercise 6: S = "+object1.calculation_06(10));
-		// System.out.println("Exercise 7: S = "+object1.calculation_07(20));
-		// System.out.println("Exercise 8: S = "+object1.calculation_08(2));
-		// System.out.println("Exercise 9: S = "+object1.calculation_09(4));
-		// System.out.println("Exercise 9: S = "+object1.calculation_09(5));
-		// System.out.println("Exercise 10: S = "+object1.calculation_10(7832));
+		Chapter01 object = new Chapter01();
 		
-		// System.out.println(object1.isPrimeNumber(997));
-		// object1.primeNumberLessThanOrEqual(997);
+		object.linearEquation(0, 0);
 
-		// object1.greatestCommonDivisorAndLeastCommonMultiple(0, 14);
+		object.quadraticEquation(4, 4, 8);
+
+		object.middleNumber(18,6,3);
+
+		object.karaokeCalculation(12, 15);
+
+		object.numberofDay(2016, 2);
+
+		System.out.println("Exercise 6: S = "+object.calculation_06(10));
+		System.out.println("Exercise 7: S = "+object.calculation_07(20));
+		System.out.println("Exercise 8: S = "+object.calculation_08(2));
+		System.out.println("Exercise 9: S = "+object.calculation_09(4));
+		System.out.println("Exercise 9: S = "+object.calculation_09(5));
+		System.out.println("Exercise 10: S = "+object.calculation_10(7832));
 		
-		System.out.println(object1.isSquareNumber(16));
-		System.out.println(object1.isSymmetryNumber(121));
-		object1.print_N_FirstFinonaci(30);
+		System.out.println(object.isPrimeNumber(997));
+		object.primeNumberLessThanOrEqual(997);
 
-		System.out.println("\n"+object1.checkFibonaci(832040));	
-		object1.perfectNumberLessThan_1000();
+		object.greatestCommonDivisorAndLeastCommonMultiple(0, 14);
+		
+		System.out.println(object.isSquareNumber(16));
+		System.out.println(object.isSymmetryNumber(121));
+		object.print_N_FirstFinonaci(30);
+
+		System.out.println("\n"+object.checkFibonaci(832040));	
+		object.perfectNumberLessThan_1000();
 
 	}
 	

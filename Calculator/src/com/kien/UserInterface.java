@@ -1,191 +1,292 @@
 package com.kien;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.*;
 
-public class UserInterface extends JFrame implements KeyListener {
+import java.awt.event.*;
+import java.awt.*;
+import java.util.logging.*;
+
+@SuppressWarnings("serial")
+public class UserInterface extends JFrame {
 
 	public UserInterface() {
-		setTitle("Calculator");
-		setBounds(0, 0, 600, 600);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setFocusable(true);
-		addKeyListener(this);
+		initComponents();
+		this.setFont(new Font("Arial", 1, 20));
+	}
 
-		/*---------------Menu Bar------------------*/
+	private void initComponents() {
 
-		JMenuBar menuBar = new JMenuBar();
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent evt) {
+				formKeyPressed(evt);
+			}
+		});
 
-		JMenu fileMenu = new JMenu("File");
-		fileMenu.add(new JMenuItem("Open"));
-		fileMenu.add(new JMenuItem("Close"));
-		fileMenu.add(new JMenuItem("Exit"));
+		expressionPanel.setBackground(new Color(255, 255, 255));
+
+		expressionLabel.setFont(new Font("Arial", 0, 48));
+		expressionLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		expressionLabel.setText("0");
+		expressionLabel.setVerticalAlignment(SwingConstants.BOTTOM);
+
+		GroupLayout expressionPanelLayout = new GroupLayout(expressionPanel);
+		expressionPanel.setLayout(expressionPanelLayout);
+		expressionPanelLayout
+				.setHorizontalGroup(expressionPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addComponent(expressionLabel, GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE));
+		expressionPanelLayout.setVerticalGroup(expressionPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(expressionLabel, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE));
+
+		cleanerPanel.setBackground(new Color(25, 26, 50));
+		cleanerPanel.setLayout(new GridLayout(1, 3));
+
+		addButton("Backspace", backspaceBtn, cleanerPanel);
+		addButton("CE", ceBtn, cleanerPanel);
+		addButton("C", cBtn, cleanerPanel);
+
+		numberPanel.setBackground(new Color(100, 20, 49));
+		numberPanel.setLayout(new GridLayout(4, 6));
+
+		addButton("MC", mcBtn, numberPanel);
+		addButton("7", sevenBtn, numberPanel);
+		addButton("8", eightBtn, numberPanel);
+		addButton("9", nineBtn, numberPanel);
+
+		addButton("/", devideBtn, numberPanel);
+		addButton("sqrt", sqrtBtn, numberPanel);
+		addButton("MR", mrBtn, numberPanel);
+
+		addButton("4", fourBtn, numberPanel);
+		addButton("5", fiveBtn, numberPanel);
+		addButton("6", sixBtn, numberPanel);
+
+		addButton("*", mulBtn, numberPanel);
+		addButton("%", percentBtn, numberPanel);
+		addButton("MS", msBtn, numberPanel);
+
+		addButton("1", oneBtn, numberPanel);
+		addButton("2", twoBtn, numberPanel);
+		addButton("3", threeBtn, numberPanel);
+
+		addButton("-", minusBtn, numberPanel);
+		addButton("1/x", oneofXBtn, numberPanel);
+		addButton("M+", mPlusBtn, numberPanel);
+
+		addButton("0", zeroBtn, numberPanel);
+		addButton("+/-", plusMinusBtn, numberPanel);
+		addButton(".", dotBtn, numberPanel);
+		addButton("+", plusBtn, numberPanel);
+		addButton("=", equalBtn, numberPanel);
+
+		fileMenu.setText("File");
+
+		open.setText("Open");
+		fileMenu.add(open);
+
+		exit.setText("Exit");
+		fileMenu.add(exit);
+
+		close.setText("Close");
+		close.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				dispose();
+			}
+		});
+		fileMenu.add(close);
 
 		menuBar.add(fileMenu);
 
-		JMenu option = new JMenu("Option");
+		optionMenu.setText("Option");
 
-		JMenu subMenu = new JMenu("Calculator");
-		subMenu.add(standardCal);
-		subMenu.add(scientificCal);
-		subMenu.add(programmerCal);
+		calculatorMenu.setText("Calculator");
 
-		option.add(subMenu);
-		option.add(new JMenuItem("Money converter"));
+		standard.setText("Standard");
+		calculatorMenu.add(standard);
 
-		menuBar.add(option);
+		scientific.setText("Scientific");
+		calculatorMenu.add(scientific);
+
+		programmer.setText("Programmer");
+		calculatorMenu.add(programmer);
+
+		optionMenu.add(calculatorMenu);
+
+		moneyConverter.setText("Money Converter");
+		optionMenu.add(moneyConverter);
+
+		menuBar.add(optionMenu);
 
 		setJMenuBar(menuBar);
-		/*---------------Menu Bar Ending------------------*/		
 
-		JPanel exprPanel = new JPanel();
-		exprPanel.setBackground(new Color(255, 255, 255));
-		
-		exprLabel.setFont(new Font("Arial", 1, 20));		
-		exprPanel.add(exprLabel);
-		this.add(BorderLayout.NORTH, exprPanel);
+		GroupLayout layout = new GroupLayout(getContentPane());
+		getContentPane().setLayout(layout);
+		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addComponent(expressionPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(cleanerPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(numberPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+				.addGroup(layout.createSequentialGroup()
+						.addComponent(expressionPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(cleanerPanel, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(numberPanel, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)));
 
-		btnPanel.setBackground(new Color(42, 50, 49));
-		GridLayout grid = new GridLayout(0, 6);
-		btnPanel.setLayout(grid);
-
-		addButton(btnBackspace);
-		addButton(btnCE);
-		addButton(btnC);
-		addButton(btnMC);
-		addButton(btn_7);
-		addButton(btn_8);
-		addButton(btn_9);
-		addButton(btnDiv);
-		addButton(btnSqrt);
-		addButton(btnMR);
-		addButton(btn_4);
-		addButton(btn_5);
-		addButton(btn_6);
-		addButton(btnMul);
-		addButton(btnPercent);
-		addButton(btnMS);
-		addButton(btn_1);
-		addButton(btn_2);
-		addButton(btn_3);
-		addButton(btnMinus);
-		addButton(btnOneofX);
-		addButton(btnMPlus);
-		addButton(btn_0);
-		addButton(btnPlusMinus);
-		addButton(btnDot);
-		addButton(btnPlus);
-		addButton(btnEquals);
-
-		this.add(btnPanel);
-
-		this.setVisible(true);
-
+		pack();
 	}
 
-	private void addButton(JButton mButton) {
-		mButton.setFont(new Font("Arial", 1, 20));
-		btnPanel.add(mButton);
-		mButton.setFocusable(false);
+	private String expression = "0";
+
+	private void formKeyPressed(KeyEvent evt) {
+		if (isNumpadKey(evt))
+			updateExpression(String.valueOf(evt.getKeyChar()));
+		if (isBackspaceKey(evt))
+			deleteLastCharacter();
+		if (isEqualsOrEnterKey(evt))
+			 getResult();
 	}
 
-	private static String expression = "0";
-	private JLabel exprLabel = new JLabel("0", JLabel.RIGHT);
-	private JPanel btnPanel = new JPanel();
-	private JButton btn_0 = new JButton("0");
-	private JButton btn_1 = new JButton("1");
-	private JButton btn_2 = new JButton("2");
-	private JButton btn_3 = new JButton("3");
-	private JButton btn_4 = new JButton("4");
-	private JButton btn_5 = new JButton("5");
-	private JButton btn_6 = new JButton("6");
-	private JButton btn_7 = new JButton("7");
-	private JButton btn_8 = new JButton("8");
-	private JButton btn_9 = new JButton("9");
-	private JButton btnPlus = new JButton("+");
-	private JButton btnMinus = new JButton("-");
-	private JButton btnDiv = new JButton("/");
-	private JButton btnMul = new JButton("*");
-	private JButton btnBackspace = new JButton("Backspace");
-	private JButton btnCE = new JButton("CE");
-	private JButton btnC = new JButton("C");
-	private JButton btnMC = new JButton("MC");
-	private JButton btnMR = new JButton("MR");
-	private JButton btnMS = new JButton("MS");
-	private JButton btnMPlus = new JButton("M+");
-	private JButton btnSqrt = new JButton("sqrt");
-	private JButton btnPercent = new JButton("%");
-	private JButton btnOneofX = new JButton("1/x");
-	private JButton btnEquals = new JButton("=");
-	private JButton btnPlusMinus = new JButton("+/-");
-	private JButton btnDot = new JButton(".");
-	private JCheckBoxMenuItem standardCal = new JCheckBoxMenuItem("Standard");
-	private JCheckBoxMenuItem scientificCal = new JCheckBoxMenuItem("Scientific");
-	private JCheckBoxMenuItem programmerCal = new JCheckBoxMenuItem("Programmer");
-
-	private static final long serialVersionUID = 1L;
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+	private void getResult() {
+		PostfixCalculator mPostfix = new PostfixCalculator(expression);
+		expression = mPostfix.getResult();
+		expressionLabel.setText(expression);
 	}
 
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		char keyPressed = e.getKeyChar();
-		if(isNumpad(keyPressed)) 
-			updateExpressionLabel(keyPressed);
-		else if (isEnterPressed(e.getKeyCode()))
-			showResult();
-		else if (isBackspacePressed(e.getKeyCode()))
-			deleteExpression(expression);
+	private boolean isEqualsOrEnterKey(KeyEvent evt) {
+		return evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyChar() == '=';
 	}
 
-	private void updateExpressionLabel(char keyPressed) {
-		// TODO Auto-generated method stub
-		expression += keyPressed;
-		exprLabel.setText(expression);
+	private boolean isBackspaceKey(KeyEvent evt) {
+		return evt.getKeyCode() == KeyEvent.VK_BACK_SPACE;
 	}
 
-	private void deleteExpression(String expression2) {
-		// TODO Auto-generated method stub
-		
+	private void updateExpression(String mKeyChar) {
+		if (expression.equals("0"))
+			expression = "";
+		if (expression.length() < 17)
+			expression += mKeyChar;
+		expressionLabel.setText(expression);
 	}
 
-	private boolean isBackspacePressed(int keyCode) {
-		// TODO Auto-generated method stub
-		return keyCode == KeyEvent.VK_BACK_SPACE;
-	}
-
-	private void showResult() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private boolean isEnterPressed(int keyCode) {
-		// TODO Auto-generated method stub
-		return keyCode == KeyEvent.VK_ENTER;
-	}
-
-	private boolean isNumpad(char keyPressed) {
-		// TODO Auto-generated method stub
-		if("0123456789..+-*/()".indexOf(keyPressed) > -1)
+	private boolean isNumpadKey(KeyEvent evt) {
+		char keyChar = evt.getKeyChar();
+		if ("0123456789./*-+%".indexOf(keyChar) > -1)
 			return true;
 		return false;
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
+	private void addButton(String btnTitle, JButton mBtn, JPanel mPanel) {
+		mBtn.setFont(new Font("Arial", 1, 20));
+		mBtn.setText(btnTitle);
+		mBtn.setFocusable(false);
+		mBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				if ("0123456789./*-+%".indexOf(btnTitle) > -1)
+					updateExpression(btnTitle);
+				if (btnTitle.equals("Backspace"))
+					deleteLastCharacter();
+				if (btnTitle.equals("C"))
+					clearExpression();
+				if (btnTitle.equals("Enter") || btnTitle.equals("="))
+					getResult();
+			}
+
+			
+		});
+		mPanel.add(mBtn);
+	}
+	
+	private void deleteLastCharacter() {
+		if (expression.length() > 0) {
+			expression = expression.substring(0, expression.length()-1);			
+		}
 		
+		if (expression.length() == 0)
+			expression = "0";
+		expressionLabel.setText(expression);
+	}
+	
+	private void clearExpression() {
+		expression = "0";
+		expressionLabel.setText(expression);
 	}
 
+	public static void main(String args[]) {
+
+		try {
+			for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (InstantiationException ex) {
+			Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (IllegalAccessException ex) {
+			Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		} catch (UnsupportedLookAndFeelException ex) {
+			Logger.getLogger(UserInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+		}
+		// </editor-fold>
+
+		/* Create and display the form */
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				new UserInterface().setVisible(true);
+			}
+		});
+	}
+
+	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private JButton backspaceBtn = new JButton();
+	private JButton cBtn = new JButton();
+	private JMenu calculatorMenu = new JMenu();
+	private JButton ceBtn = new JButton();
+	private JPanel cleanerPanel = new JPanel();
+	private JMenuItem close = new JMenuItem();
+	private JButton devideBtn = new JButton();
+	private JButton dotBtn = new JButton();
+	private JButton eightBtn = new JButton();
+	private JButton equalBtn = new JButton();
+	private JMenuItem exit = new JMenuItem();
+	private JLabel expressionLabel = new JLabel();
+	private JPanel expressionPanel = new JPanel();
+	private JMenu fileMenu = new JMenu();
+	private JButton fiveBtn = new JButton();
+	private JButton fourBtn = new JButton();
+	private JButton mPlusBtn = new JButton();
+	private JButton mcBtn = new JButton();
+	private JMenuBar menuBar = new JMenuBar();
+	private JButton minusBtn = new JButton();
+	private JMenuItem moneyConverter = new JMenuItem();
+	private JButton mrBtn = new JButton();
+	private JButton msBtn = new JButton();
+	private JButton mulBtn = new JButton();
+	private JButton nineBtn = new JButton();
+	private JPanel numberPanel = new JPanel();
+	private JButton oneBtn = new JButton();
+	private JButton oneofXBtn = new JButton();
+	private JMenuItem open = new JMenuItem();
+	private JMenu optionMenu = new JMenu();
+	private JButton percentBtn = new JButton();
+	private JButton plusBtn = new JButton();
+	private JButton plusMinusBtn = new JButton();
+	private JCheckBoxMenuItem programmer = new JCheckBoxMenuItem();
+	private JCheckBoxMenuItem scientific = new JCheckBoxMenuItem();
+	private JCheckBoxMenuItem standard = new JCheckBoxMenuItem();
+	private JButton sevenBtn = new JButton();
+	private JButton sixBtn = new JButton();
+	private JButton sqrtBtn = new JButton();
+	private JButton threeBtn = new JButton();
+	private JButton twoBtn = new JButton();
+	private JButton zeroBtn = new JButton();
+	// End of variables declaration//GEN-END:variables
 }
