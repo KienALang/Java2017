@@ -21,7 +21,7 @@ public class Main extends JFrame {
         addLabel("Linear Equation Program", headerLabel, headerPanel);
         
 
-        inputPanel.setBackground(new Color(84, 70, 87));
+        inputPanel.setBackground(new Color(135, 167, 219));
         inputPanel.setLayout(new GridLayout(3, 2));
         
         addLabel("Base Value", baseValueLabel, inputPanel);
@@ -48,6 +48,7 @@ public class Main extends JFrame {
             .addComponent(headerPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(buttonPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+        
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -55,7 +56,7 @@ public class Main extends JFrame {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(inputPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+                .addComponent(buttonPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
