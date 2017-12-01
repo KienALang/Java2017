@@ -48,6 +48,7 @@ public class Main extends JFrame {
 
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
+
 		layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addComponent(inputPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 				.addComponent(headerPanel, GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
@@ -118,9 +119,6 @@ public class Main extends JFrame {
 			break;
 		case "Exit":
 			dispose();
-			break;
-
-		default:
 			break;
 		}
 	}
